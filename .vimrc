@@ -44,6 +44,7 @@ set shiftwidth=2
 
 " Fold Settings
 set foldmethod=syntax
+set foldminlines=5
 set foldlevelstart=0
 
 let javascript_fold=1
