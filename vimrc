@@ -54,10 +54,16 @@ imap <c-space> <c-x><c-o>
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 
-
-
-if has("mouse")
-  set mouse=a
+if has("autocmd")
+  " Drupal *.module and *.install files.
+  augroup module
+    autocmd BufRead,BufNewFile *.module set filetype=php
+    autocmd BufRead,BufNewFile *.install set filetype=php
+    autocmd BufRead,BufNewFile *.test set filetype=php
+    autocmd BufRead,BufNewFile *.inc set filetype=php
+    autocmd BufRead,BufNewFile *.profile set filetype=php
+    autocmd BufRead,BufNewFile *.view set filetype=php
+  augroup END
 endif
 
 " toggle NERDtree
@@ -69,9 +75,17 @@ cmap w!! %!sudo tee > /dev/null %
 " sparkup settings
 let g:sparkupArgs = '--no-last-newline --indent-spaces=2'
 
+
 " highlight any text over 80 columns
 highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
+
+
+" MOUSE
+
+if has("mouse")
+  set mouse=a
+endif
 
 " toggle text and mouse settings for easy copying
 nmap <ESC>' :set list!<CR> :set number!<CR> :call ToggleMouse()<CR>
