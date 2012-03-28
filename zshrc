@@ -38,7 +38,6 @@ alias opus='ssh rcs@opus.robisoncreative.com -t su'
 alias freenode="ssh -NL 6667:irc.freenode.net:6667 lucasr.com"
 alias tpirc="ssh -NL 6666:irc.esper.net:6667 lucasr.com"
 
-alias tmux="tmux a"
 alias mtr="mtr --curses"
 
 # proxy info
