@@ -45,6 +45,8 @@ export http_proxy=http://10.10.10.13:8080
 export https_proxy=http://10.10.10.13:8080
 export HTTP_PROXY=http://10.10.10.13:8080
 export HTTPS_PROXY=http://10.10.10.13:8080
+
+alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
 #
 # if tmux make force get zsh to not be stupid and use 256 color mode
 if [[ ${+TMUX} == 1 ]]
