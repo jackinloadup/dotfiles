@@ -19,6 +19,8 @@ set pastetoggle=<f2>
 set autoindent
 set smartindent
 
+au BufRead,BufNewFile .tmux.conf setfiletype tmux
+
 """"""""""""""""""""""""""""""""""
 " User interface
 """"""""""""""""""""""""""""""""""
