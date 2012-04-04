@@ -33,7 +33,7 @@ alias lr='ssh -L 10000:localhost:10000 lucasr.com -t su -c "tmux\ a" root'
 alias wi='ssh root@wiledesign.wiledesign.com -t tmux a'
 alias toph='ssh sean@toph.tac0bell.com -t su'
 alias nana='ssh root@nana.wikiwhore.com -t tmux a'
-alias opus='ssh rcs@opus.robisoncreative.com -t su'
+alias opus='ssh rcs@opus.robisoncreative.com -t su -c "tmux\ a" root'
 
 alias freenode="ssh -NL 6667:irc.freenode.net:6667 lucasr.com"
 alias tpirc="ssh -NL 6666:irc.esper.net:6667 lucasr.com"
