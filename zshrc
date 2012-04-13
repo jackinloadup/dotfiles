@@ -59,3 +59,18 @@ unsetopt correct_all
 export PATH=$PATH:/usr/local/sbin:/Developer/android-sdk/platform-tools:$HOME/bin
 
 setopt autopushd
+
+function git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null)
+  if [[ $ref == refs* ]]; then
+    git="${ref#refs/heads/}"
+  elif [[ -n $(git describe --exact-match HEAD 2> /dev/null) ]]; then
+    git=$(git describe --exact-match HEAD 2> /dev/null)
+  elif [[ -n $(git describe HEAD 2> /dev/null) ]]; then
+    git=$(git describe HEAD | sed "s/.\{9\}$//g" | sed "s/-/+/"  2> /dev/null)
+  fi
+
+  if [[ $git =~ .+ ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX$git$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX";
+  fi
+}
