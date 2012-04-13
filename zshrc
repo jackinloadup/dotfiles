@@ -60,6 +60,7 @@ export PATH=$PATH:/usr/local/sbin:/Developer/android-sdk/platform-tools:$HOME/bi
 
 setopt autopushd
 
+# override oh-my-zsh function
 function git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null)
   if [[ $ref == refs* ]]; then
@@ -72,5 +73,24 @@ function git_prompt_info() {
 
   if [[ $git =~ .+ ]]; then
     echo "$ZSH_THEME_GIT_PROMPT_PREFIX$git$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX";
+  fi
+}
+
+# override lukerandall theme function
+function my_git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null)
+  if [[ $ref == refs* ]]; then
+    git="${ref#refs/heads/}"
+  elif [[ -n $(git describe --exact-match HEAD 2> /dev/null) ]]; then
+    git=$(git describe --exact-match HEAD 2> /dev/null)
+  elif [[ -n $(git describe HEAD 2> /dev/null) ]]; then
+    git=$(git describe HEAD | sed "s/.\{9\}$//g" | sed "s/-/+/"  2> /dev/null)
+  fi
+
+  GIT_STATUS=$(git_prompt_status)
+  [[ -n $GIT_STATUS ]] && GIT_STATUS=" $GIT_STATUS"
+
+  if [[ $git =~ .+ ]]; then
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX$git$GIT_STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX";
   fi
 }
