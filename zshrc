@@ -56,8 +56,6 @@ fi
 
 unsetopt correct_all
 
-export PATH=$PATH:/usr/local/sbin:/Developer/android-sdk/platform-tools:$HOME/bin
-
 setopt autopushd
 
 # override oh-my-zsh function
