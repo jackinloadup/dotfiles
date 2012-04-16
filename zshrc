@@ -24,29 +24,34 @@ export DISABLE_AUTO_UPDATE="true"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/.bash_profile
 
 # Customize to your needs...
 
-alias pub1='ssh pub1 -t su -c "tmux\ a" root'
-alias wi='ssh root@wiledesign.wiledesign.com -t tmux a'
-alias toph='ssh sean@toph.tac0bell.com -t su'
-alias nana='ssh root@nana.wikiwhore.com -t tmux a'
-alias opus='ssh rcs@opus.robisoncreative.com -t su -c "tmux\ a" root'
+HOSTNAME=`hostname -s`
 
-alias freenode="ssh -NL 6667:irc.freenode.net:6667 lucasr.com"
-alias tpirc="ssh -NL 6666:irc.esper.net:6667 lucasr.com"
+if [[ $HOSTNAME == 'mac009' || $HOSTNAME == 'k-lmriutzel' ]] {
+  source $HOME/.bash_profile
+  
+  alias pub1='ssh pub1 -t su -c "tmux\ a" root'
+  alias wi='ssh wi -t tmux a'
+  alias toph='ssh toph -t su'
+  alias nana='ssh nana -t tmux a'
+  alias opus='ssh opus -t su -c "tmux\ a" root'
+  
+  alias freenode="ssh -NL 6667:irc.freenode.net:6667 pub1"
+  alias tpirc="ssh -NL 6666:irc.esper.net:6667 pub1"
+  
+  alias mtr="mtr --curses"
+  
+  # proxy info
+  export http_proxy=http://10.10.10.13:8080
+  export https_proxy=http://10.10.10.13:8080
+  export HTTP_PROXY=http://10.10.10.13:8080
+  export HTTPS_PROXY=http://10.10.10.13:8080
+  
+  alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
+}
 
-alias mtr="mtr --curses"
-
-# proxy info
-export http_proxy=http://10.10.10.13:8080
-export https_proxy=http://10.10.10.13:8080
-export HTTP_PROXY=http://10.10.10.13:8080
-export HTTPS_PROXY=http://10.10.10.13:8080
-
-alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
-#
 # if tmux make force get zsh to not be stupid and use 256 color mode
 if [[ ${+TMUX} == 1 ]]
 then
