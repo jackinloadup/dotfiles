@@ -85,6 +85,7 @@ match OverLength /\%81v.\+/
 
 if has("mouse")
   set mouse=a
+  set ttymouse=xterm2
 endif
 
 " toggle text and mouse settings for easy copying
