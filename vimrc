@@ -1,5 +1,8 @@
 "filetype indent plugin on
 
+filetype on
+filetype plugin on
+
 " enable syntax
 syntax on
 
@@ -74,12 +77,6 @@ cmap w!! %!sudo tee > /dev/null %
 
 " sparkup settings
 let g:sparkupArgs = '--no-last-newline --indent-spaces=2'
-
-
-" highlight any text over 80 columns
-highlight OverLength ctermbg=darkred ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
-
 
 " MOUSE
 
