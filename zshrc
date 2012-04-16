@@ -29,7 +29,6 @@ source $HOME/.bash_profile
 # Customize to your needs...
 
 alias pub1='ssh pub1 -t su -c "tmux\ a" root'
-alias lr='ssh -L 10000:localhost:10000 lucasr.com -t su -c "tmux\ a" root'
 alias wi='ssh root@wiledesign.wiledesign.com -t tmux a'
 alias toph='ssh sean@toph.tac0bell.com -t su'
 alias nana='ssh root@nana.wikiwhore.com -t tmux a'
