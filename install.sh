@@ -29,6 +29,22 @@ for file in $(find $DIR -maxdepth 1); do
  
  if [[ $file =~ '^[a-z]' ]] && [[ $file != 'install.sh' ]]
  then
+   
+   # does file already exist?
+   if [ -e "$DESTINATION/.$file" ]
+   then
+    echo -n ".$file exists. Overwrite? (\e[1;32my\e[00m/\e[00;31mn\e[00m) "
+    read OVERWRITE
+    if [[ $OVERWRITE == 'y' ]]
+    then
+      echo "\e[1;32mOverwriting\e[00m"
+      rm "$DESTINATION/.$file"
+    else
+      echo "\e[1;31mSkipping file\e[00m"
+      continue
+    fi
+   fi
+   
    ln -s $DIR/$file $DESTINATION/.$file
  fi
 done
