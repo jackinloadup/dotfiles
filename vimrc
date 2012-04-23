@@ -50,7 +50,7 @@ set foldmethod=syntax
 set foldminlines=5
 set foldlevelstart=0
 
-let javascript_fold=1
+let javaScript_fold=1
 
 " autocomplete settings
 imap <c-space> <c-x><c-o>
