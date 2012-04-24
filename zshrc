@@ -29,9 +29,9 @@ source $ZSH/oh-my-zsh.sh
 
 HOSTNAME=`hostname -s`
 
-if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME =~ 'lmriutzel' ]] {
+if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]] {
   source $HOME/.bash_profile
-  
+
   alias pub1='ssh pub1 -t su -c "tmux\ a" root'
   alias wi='ssh wi -t tmux a'
   alias toph='ssh toph -t su'
