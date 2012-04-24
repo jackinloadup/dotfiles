@@ -48,10 +48,11 @@ set shiftwidth=2
 
 " Fold Settings
 set foldmethod=syntax
-set foldminlines=5
+set foldminlines=0
 set foldlevelstart=0
 
 let javaScript_fold=1
+au FileType javascript call JavaScriptFold()
 
 " autocomplete settings
 imap <c-space> <c-x><c-o>
