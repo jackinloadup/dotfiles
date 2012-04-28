@@ -29,7 +29,8 @@ source $ZSH/oh-my-zsh.sh
 
 HOSTNAME=`hostname -s`
 
-if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]] {
+if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]]
+then
   source $HOME/.bash_profile
 
   alias pub1='ssh pub1 -t su -c "tmux\ a" root'
@@ -53,7 +54,7 @@ if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]] {
     
     alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
   fi
-}
+fi
 
 # if tmux make force get zsh to not be stupid and use 256 color mode
 if [[ ${+TMUX} == 1 ]]
