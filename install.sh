@@ -37,7 +37,6 @@ for file in $(find $DIR -maxdepth 1); do
     read OVERWRITE
     if [[ $OVERWRITE == 'y' ]]
     then
-      echo "\e[1;32mOverwriting\e[00m"
       rm "$DESTINATION/.$file"
     else
       echo "\e[1;31mSkipping file\e[00m"
@@ -45,6 +44,7 @@ for file in $(find $DIR -maxdepth 1); do
     fi
    fi
    
+   echo "\e[1;32mLinking $file\e[00m"
    ln -s $DIR/$file $DESTINATION/.$file
  fi
 done
