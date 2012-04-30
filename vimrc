@@ -74,9 +74,6 @@ if has("autocmd")
   augroup END
 endif
 
-" toggle NERDtree
-nmap <ESC>t :NERDTreeToggle<CR>
-
 " forgot sudo.. no problem
 cmap w!! %!sudo tee > /dev/null %
 
