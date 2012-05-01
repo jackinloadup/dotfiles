@@ -37,7 +37,15 @@ for file in $(find $DIR -maxdepth 1); do
     read OVERWRITE
     if [[ $OVERWRITE == 'y' ]]
     then
-      rm "$DESTINATION/.$file"
+      if [[ -f "$DESTINATION/.$file" ]]
+      then
+        rm "$DESTINATION/.$file"
+      fi
+
+      if [[ -d "$DESTINATION/.$file" ]]
+      then
+        rm -r "$DESTINATION/.$file"
+      fi
     else
       echo "\e[1;31mSkipping file\e[00m"
       continue
