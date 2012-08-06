@@ -30,3 +30,9 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
+[url "git+ssh://Jackinloadup@git.drupal.org/project/"]
+  insteadOf = drupal:
+[url "git+ssh://git@wiledesign.com/"]
+  insteadOf = wi:
+[url "git+ssh://git@kanakuk.com/"]
+  insteadOf = kuk:
