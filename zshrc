@@ -29,7 +29,7 @@ source $ZSH/oh-my-zsh.sh
 
 HOSTNAME=`hostname -s`
 
-if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]]
+if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]] || [[ $HOSTNAME == 'imac' ]]
 then
   source $HOME/.bash_profile
 
