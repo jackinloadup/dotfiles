@@ -38,6 +38,16 @@ function setup_proxy() {
   
   alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
 
+  if [[ $(tmux ls 2> /dev/null | grep cmds | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]
+  then
+    tmux new-session -d -s cmds
+  fi
+
+  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]
+  then
+    tmux new-window -k -t cmds:1 -n irc 'ssh -NL 6667:irc.freenode.net:6667 pub1'
+  fi
+
   if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Work' ]]
   then
     networksetup -switchtolocation Work
@@ -49,6 +59,11 @@ function teardown_proxy() {
   unset https_proxy
   unset HTTP_PROXY
   unset HTTPS_PROXY
+
+  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') != 0 ]]
+  then
+    tmux kill-window -t cmds:irc
+  fi
 
   if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Automatic' ]]
   then
