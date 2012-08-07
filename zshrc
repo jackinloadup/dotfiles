@@ -37,6 +37,11 @@ function setup_proxy() {
   export HTTPS_PROXY=$PROXY_ADDR
   
   alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
+
+  if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Work' ]]
+  then
+    networksetup -switchtolocation Work
+  fi
 }
 
 function teardown_proxy() {
@@ -44,6 +49,11 @@ function teardown_proxy() {
   unset https_proxy
   unset HTTP_PROXY
   unset HTTPS_PROXY
+
+  if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Automatic' ]]
+  then
+    networksetup -switchtolocation Automatic
+  fi
 }
 
 HOSTNAME=`hostname -s`
