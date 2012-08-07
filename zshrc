@@ -27,6 +27,25 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
+function setup_proxy() {
+
+  PROXY_ADDR=HTTP://10.10.10.13:8080;
+  # proxy info
+  export http_proxy=$PROXY_ADDR
+  export https_proxy=$PROXY_ADDR
+  export HTTP_PROXY=$PROXY_ADDR
+  export HTTPS_PROXY=$PROXY_ADDR
+  
+  alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
+}
+
+function teardown_proxy() {
+  unset http_proxy
+  unset https_proxy
+  unset HTTP_PROXY
+  unset HTTPS_PROXY
+}
+
 HOSTNAME=`hostname -s`
 
 if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]] || [[ $HOSTNAME == 'imac' ]]
@@ -44,16 +63,13 @@ then
   
   alias mtr="mtr --curses"
   
-  if [[ $HOSTNAME != 'k-lmriutzel' ]]
-  then
-    # proxy info
-    export http_proxy=http://10.10.10.13:8080
-    export https_proxy=http://10.10.10.13:8080
-    export HTTP_PROXY=http://10.10.10.13:8080
-    export HTTPS_PROXY=http://10.10.10.13:8080
+  if [[ $HOSTNAME != 'k-lmriutzel' ]]; then
+    setup_proxy
     
-    alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
+  else
+    teardown_proxy
   fi
+
 fi
 
 # if tmux make force get zsh to not be stupid and use 256 color mode
