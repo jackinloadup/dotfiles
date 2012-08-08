@@ -77,6 +77,7 @@ then
   source $HOME/.bash_profile
 
   alias pub1='ssh pub1 -t su -c "tmux\ a" root'
+  alias pub1d='ssh pub1 -t su -c "tmux\ a\ -d" root'
   alias wi='ssh wi -t tmux a'
   alias toph='ssh toph -t su'
   alias nana='ssh nana -t tmux a'
