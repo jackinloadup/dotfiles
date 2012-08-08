@@ -23,10 +23,6 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
-
 function setup_proxy() {
 
   PROXY_ADDR=HTTP://10.10.10.13:8080;
@@ -75,6 +71,9 @@ HOSTNAME=`hostname -s`
 
 if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]] || [[ $HOSTNAME == 'imac' ]]
 then
+
+  plugins+=(brew django osx)
+
   source $HOME/.bash_profile
 
   alias pub1='ssh pub1 -t su -c "tmux\ a" root'
@@ -141,3 +140,5 @@ function my_git_prompt_info() {
     echo "$ZSH_THEME_GIT_PROMPT_PREFIX$git$GIT_STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX";
   fi
 }
+
+source $ZSH/oh-my-zsh.sh
