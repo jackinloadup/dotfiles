@@ -67,10 +67,7 @@ function teardown_proxy() {
   fi
 }
 
-HOSTNAME=`hostname -s`
-
-if [[ $HOSTNAME =~ '(k|mac)[0-9]{3}' ]] || [[ $HOSTNAME == 'k-lmriutzel' ]] || [[ $HOSTNAME == 'imac' ]]
-then
+if [[ $(uname -s) == 'Darwin' ]]; then
 
   plugins+=(brew django osx)
 
@@ -88,9 +85,10 @@ then
   
   alias mtr="mtr --curses"
   
-  if [[ $HOSTNAME != 'k-lmriutzel' ]]; then
+  ROUTER=`networksetup -getinfo Ethernet | grep -e '^Router' | sed 's/Router\:[ ]//g' | tr -s ' '`
+
+  if [[ $ROUTER == '10.10.12.10' ]]; then
     setup_proxy
-    
   else
     teardown_proxy
   fi
