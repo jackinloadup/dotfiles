@@ -44,9 +44,9 @@ function setup_proxy() {
     tmux new-window -k -t cmds:1 -n irc 'ssh -NL 6667:irc.freenode.net:6667 pub1'
   fi
 
-  if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Work' ]]
-  then
-    networksetup -switchtolocation Work
+  if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Work' ]]; then
+    networksetup -switchtolocation Work 1> /dev/null
+    print 'Switched to Work network'
   fi
 }
 
@@ -61,9 +61,9 @@ function teardown_proxy() {
     tmux kill-window -t cmds:irc
   fi
 
-  if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Automatic' ]]
-  then
-    networksetup -switchtolocation Automatic
+  if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Automatic' ]]; then
+    networksetup -switchtolocation Automatic 1> /dev/null
+    print 'Switched to Automatic network'
   fi
 }
 
