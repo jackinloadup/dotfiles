@@ -70,6 +70,8 @@ function teardown_proxy() {
   fi
 }
 
+alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
+
 if [[ $(uname -s) == 'Darwin' ]]; then
 
   plugins+=(brew django osx)
