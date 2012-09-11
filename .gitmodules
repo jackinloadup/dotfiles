@@ -1,15 +1,15 @@
-[submodule "oh-my-zsh"]
+[submodule "HOME/oh-my-zsh"]
 	path = HOME/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "javascript-syntax"]
+[submodule "HOME/vim/bundle/javascript-syntax"]
 	path = HOME/vim/bundle/javascript-syntax
 	url = https://github.com/jackinloadup/vim-javascript-syntax.git
-[submodule "vim-powerline"]
+[submodule "HOME/vim/bundle/powerline"]
 	path = HOME/vim/bundle/powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
-[submodule "vim-solarized"]
+[submodule "HOME/vim/bundle/solarized"]
 	path = HOME/vim/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "vim-surround"]
+[submodule "HOME/vim/bundle/vim-surround"]
 	path = HOME/vim/bundle/vim-surround
 	url = http://github.com/tpope/vim-surround.git
