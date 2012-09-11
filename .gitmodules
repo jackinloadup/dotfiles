@@ -1,5 +1,5 @@
 [submodule "oh-my-zsh"]
-	path = oh-my-zsh
+	path = HOME/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule "javascript-syntax"]
 	path = HOME/vim/bundle/javascript-syntax
