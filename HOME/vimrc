@@ -54,6 +54,18 @@ set foldmethod=syntax
 set foldminlines=0
 set foldlevelstart=0
 
+" Keyboard settings
+
+" disable arrow keys
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
 let javaScript_fold=1
 au FileType javascript call JavaScriptFold()
 
