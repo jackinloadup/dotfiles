@@ -26,57 +26,30 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
-function setup_proxy() {
+source ~/.zshrc_helpers
 
-  PROXY_ADDR=HTTP://10.10.10.13:8080;
-  # proxy info
-  export http_proxy=$PROXY_ADDR
-  export https_proxy=$PROXY_ADDR
-  export HTTP_PROXY=$PROXY_ADDR
-  export HTTPS_PROXY=$PROXY_ADDR
-  
-  alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
+# get information about system
+is_mac=$(detect_mac)
+ROUTER=$(get_router_ip $is_mac)
 
-  if [[ $(tmux ls 2> /dev/null | grep cmds | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]
-  then
-    tmux new-session -d -s cmds
+if [[ $ROUTER == '10.10.12.10' ]]; then
+  is_kanakuk="yes";
+fi
+
+if [[ $is_mac == "yes" ]]; then
+  plugins+=(brew osx)
+  if [[ -e $HOME/.bash_profile ]]; then
+    source $HOME/.bash_profile
   fi
+fi
 
-  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]
-  then
-    tmux new-window -k -t cmds:1 -n irc 'ssh -NL 6667:irc.freenode.net:6667 pub1'
-  fi
-
-  if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Work' ]]; then
-    networksetup -switchtolocation Work 1> /dev/null
-    print 'Switched to Work network'
-  fi
-}
-
-function teardown_proxy() {
-  unset http_proxy
-  unset https_proxy
-  unset HTTP_PROXY
-  unset HTTPS_PROXY
-
-  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') != 0 ]]
-  then
-    tmux kill-window -t cmds:irc
-  fi
-
-  if [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Automatic' ]]; then
-    networksetup -switchtolocation Automatic 1> /dev/null
-    print 'Switched to Automatic network'
-  fi
-}
 
 alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
 
-if [[ $(uname -s) == 'Darwin' ]]; then
+if [[ $is_mac == "yes" ]] || [[ $(hostname) == "lriutzel" ]]; then
 
-  plugins+=(brew django osx)
+  plugins+=(django)
 
-  source $HOME/.bash_profile
 
   alias pub1='ssh pub1 -t su -c "tmux\ a" root'
   alias pub1d='ssh pub1 -t su -c "tmux\ a\ -d" root'
@@ -87,12 +60,8 @@ if [[ $(uname -s) == 'Darwin' ]]; then
   
   alias freenode="ssh -NL 6667:irc.freenode.net:6667 pub1"
   alias tpirc="ssh -NL 6666:irc.esper.net:6667 pub1"
-  
-  alias mtr="mtr --curses"
-  
-  ROUTER=`networksetup -getinfo Ethernet | grep -e '^Router' | sed 's/Router\:[ ]//g' | tr -s ' '`
 
-  if [[ $ROUTER == '10.10.12.10' ]]; then
+  if [[ $is_kanakuk == "yes" ]]; then
     setup_proxy
   else
     teardown_proxy
