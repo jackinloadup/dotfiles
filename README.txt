@@ -12,5 +12,5 @@ $ zsh install.sh ~sean
 -----------------
       OTHER
 -----------------
-# Follow this guild to get drupal stuff going
+# Follow this guide to get drupal stuff going
 # http://echodittolabs.org/drupal-coding-standards-vim-code-sniffer-syntastic-regex
