@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 # allow the installation destionation to be passed in as arg1
