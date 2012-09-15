@@ -56,6 +56,9 @@ set foldlevelstart=0
 
 " Keyboard settings
 
+" C-r in visual mode will pull the selected text into a replace statement
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 " disable arrow keys
 map <up> <nop>
 map <down> <nop>
