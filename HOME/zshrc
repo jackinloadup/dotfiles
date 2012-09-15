@@ -38,11 +38,11 @@ fi
 
 if [[ $is_mac == "yes" ]]; then
   plugins+=(brew osx)
-  if [[ -e $HOME/.bash_profile ]]; then
-    source $HOME/.bash_profile
-  fi
 fi
 
+if [[ -e $HOME/.bash_profile ]]; then
+  source $HOME/.bash_profile
+fi
 
 alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
 
@@ -70,9 +70,12 @@ if [[ $is_mac == "yes" ]] || [[ $(hostname) == "lriutzel" ]]; then
 fi
 
 # if tmux make force get zsh to not be stupid and use 256 color mode
-if [[ ${+TMUX} == 1 ]]
-then
+if [[ ${+TMUX} == 1 ]]; then
   export TERM=screen-256color
+elif [[ $TERM != "xterm-256color" ]]; then
+  if [[ $(toe /usr/share/terminfo | grep -o 'xterm-256color' | tr -s ' ') != 'xterm-256color' ]]; then
+    export TERM='xterm-256color'
+  fi
 fi
 
 unsetopt correct_all
