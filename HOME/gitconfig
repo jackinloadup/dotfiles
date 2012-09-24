@@ -27,6 +27,8 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   poke = !git ls-remote origin | grep -w refs/heads/poke && git push origin :poke || git push origin master:poke
   board = "!f() { php $HOME/bin/gitboard $@; }; f"
+  co = checkout
+  br = branch
 [diff]
 	tool = vimdiff
 [difftool]
