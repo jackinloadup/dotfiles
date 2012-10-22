@@ -40,6 +40,9 @@ set ignorecase smartcase "Ignore case when searching
 "display bracket match
 set showmatch "Show matching bracets when text indicator is over them
 
+" highlight all search results
+set hlsearch
+
 """"""""""""""""""""""""""""""""""
 " Editor
 """"""""""""""""""""""""""""""""""
