@@ -22,3 +22,6 @@
 [submodule "HOME/vim/bundle/markdown"]
 	path = HOME/vim/bundle/markdown
 	url = https://github.com/hallison/vim-markdown.git
+[submodule "HOME/vim/bundle/supertab"]
+	path = HOME/vim/bundle/supertab
+	url = https://github.com/ervandew/supertab.git
