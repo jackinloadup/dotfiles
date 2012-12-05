@@ -67,6 +67,7 @@ if [[ $is_mac == "yes" ]] || [[ $(hostname) == "lriutzel" ]]; then
     teardown_proxy
   fi
 
+  irc_tunnel
 fi
 
 # if tmux make force get zsh to not be stupid and use 256 color mode

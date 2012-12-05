@@ -32,16 +32,6 @@ function setup_proxy() {
   
   alias noproxy="unset http_proxy; unset https_proxy; unset HTTP_PROXY; unset HTTPS_PROXY; "
 
-  # Setup tmux session for behind the scenes commands it not already running
-  if [[ $(tmux ls 2> /dev/null | grep cmds | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]; then
-    tmux new-session -d -s cmds
-  fi
-
-  # Add tmux window for irc tunnel to get around kuk firewall if not already setup
-  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]; then
-    tmux new-window -k -t cmds:1 -n irc 'ssh -NL 6667:irc.freenode.net:6667 pub1'
-  fi
-
   if [[ $is_mac == "yes" ]] && [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Work' ]]; then
     networksetup -switchtolocation Work 1> /dev/null
     print 'Switched to Work network'
@@ -59,12 +49,6 @@ function teardown_proxy() {
   unset HTTP_PROXY
   unset HTTPS_PROXY
 
-  # tear down irc tunnel when not needed
-  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') != 0 ]]
-  then
-    tmux kill-window -t cmds:irc
-  fi
-
   if [[ $is_mac == "yes" ]] && [[ $(networksetup -getcurrentlocation 2> /dev/null) != 'Automatic' ]]; then
     networksetup -switchtolocation Automatic 1> /dev/null
     print 'Switched to Automatic network'
@@ -74,4 +58,22 @@ function teardown_proxy() {
       print 'Switched to Automatic network'
     fi
   fi
+}
+
+function irc_tunnel() {
+  # Setup tmux session for behind the scenes commands it not already running
+  if [[ $(tmux ls 2> /dev/null | grep cmds | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]; then
+    tmux new-session -d -s cmds
+  fi
+
+  # Add tmux window for irc tunnel to get around kuk firewall if not already setup
+  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]; then
+    tmux new-window -k -t cmds:1 -n irc 'ssh -NL 7778:localhost:7778 wi'
+  fi
+
+  # tear down irc tunnel when not needed
+  #if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') != 0 ]]
+  #then
+  #  tmux kill-window -t cmds:irc
+  #fi
 }
