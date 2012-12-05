@@ -28,6 +28,8 @@ plugins=(git)
 
 source ~/.zshrc_helpers
 
+export EDITOR="vim"
+
 # get information about system
 is_mac=$(detect_mac)
 ROUTER=$(get_router_ip $is_mac)
