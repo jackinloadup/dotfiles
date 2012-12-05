@@ -23,6 +23,7 @@
   email = lriutzel@gmail.com
 [core]
   excludesfile = ~/.gitignore
+	editor = /usr/bin/vim
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   poke = !git ls-remote origin | grep -w refs/heads/poke && git push origin :poke || git push origin master:poke
