@@ -22,8 +22,7 @@ function get_router_ip {
 }
 
 function setup_proxy() {
-
-  PROXY_ADDR=HTTP://10.10.10.13:8080;
+  PROXY_ADDR=http://10.10.10.13:8080;
   # proxy info
   export http_proxy=$PROXY_ADDR
   export https_proxy=$PROXY_ADDR
