@@ -68,7 +68,9 @@ if [[ $is_mac == "yes" ]] || [[ $(hostname) == "k-lmriutzel" ]]; then
     alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
   fi
 
-  irc_tunnel
+  if [[ ${+TMUX} != 1 ]]; then
+    irc_tunnel
+  fi
 fi
 
 # if tmux make force get zsh to not be stupid and use 256 color mode
