@@ -1,8 +1,68 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer:
+"     Lucas Riuyzel - lriutzel@gmail.com (aka jackinloadup)
+"
+" Version:
+"     0.8 - 12/1/12
+"
+" BlogPost:
+"     TBA
+"
+" WhereToGet:
+"     Get the latest version of this vimrc as well as plugins
+"     Also checkout my configuration for zsh, tmux, and more
+"     https://github.com/jackinloadup/dotfiles
+"
+" Credits:
+"     Amir Salihefendic - http://amix.dk - amix@amix.dk
+"     http://amix.dk/vim/vimrc.html
+"
+" Sections:
+"     -> General
+"     -> VIM user interface
+"     -> Colors and Fonts
+"     -> Files and backups
+"     -> Text, tab and indent related
+"     -> Visual mode related
+"     -> Moving around, tabs and buffers
+"     -> Status line
+"     -> Editing mappings
+"     -> vimgrep searching and cope displaying
+"     -> Spell checking
+"     -> Misc
+"     -> Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"call pathogen
 call pathogen#infect()
 "call pathogen#helptags()
 
-filetype on
+" Sets how many lines of history VIM has to remember
+set history=700
+
+" Enable filetype plugin
+filetype indent on
 filetype plugin on
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " enable syntax
 syntax on
@@ -62,6 +122,9 @@ set foldlevelstart=0
 
 " allow jk to take you out of insert mode
 imap jk <Esc>
+
+" save right from insert mode
+imap jj <Esc>:w<CR>
 
 
 " C-r in visual mode will pull the selected text into a replace statement
