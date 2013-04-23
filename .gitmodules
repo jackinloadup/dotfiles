@@ -25,3 +25,6 @@
 [submodule "HOME/vim/bundle/supertab"]
 	path = HOME/vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
+[submodule "submodules/drupal-vimrc"]
+	path = submodules/drupal-vimrc
+	url = http://git.drupal.org/project/vimrc.git
