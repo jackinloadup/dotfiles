@@ -28,3 +28,6 @@
 [submodule "submodules/drupal-vimrc"]
 	path = submodules/drupal-vimrc
 	url = http://git.drupal.org/project/vimrc.git
+[submodule "HOME/vim/bundle/puppet-syntax-vim"]
+	path = HOME/vim/bundle/puppet-syntax-vim
+	url = https://github.com/puppetlabs/puppet-syntax-vim.git
