@@ -63,12 +63,6 @@ if [[ $is_mac == "yes" ]] || [[ $(hostname) == "lriutzel" ]]; then
   alias freenode="ssh -NL 6667:irc.freenode.net:6667 pub1"
   alias tpirc="ssh -NL 6666:irc.esper.net:6667 pub1"
 
-  if [[ $is_kanakuk == "yes" ]]; then
-    setup_proxy
-  else
-    teardown_proxy
-  fi
-
   irc_tunnel
 fi
 
