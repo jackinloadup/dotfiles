@@ -5,3 +5,4 @@ autocmd BufNewFile,BufRead tmux.conf set filetype=tmux
 autocmd BufNewFile,BufRead .tmux.conf set filetype=tmux
 " cpp added to edit CSGO files
 autocmd BufNewFile,BufRead *.sp set filetype=cpp
+autocmd BufNewFile,BufRead *.scss set filetype=css
