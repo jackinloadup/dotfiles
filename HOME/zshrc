@@ -50,7 +50,7 @@ alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Stan
 # for the lulz
 alias hack="cat /dev/urandom | hexdump"
 
-if [[ $is_mac == "yes" ]] || [[ $(hostname) == "lriutzel" ]]; then
+if [[ $is_mac == "yes" ]] || [[ $(hostname) == "k-lmriutzel" ]]; then
 
   plugins+=(django)
 
