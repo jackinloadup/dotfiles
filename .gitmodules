@@ -31,3 +31,6 @@
 [submodule "HOME/vim/bundle/puppet-syntax-vim"]
 	path = HOME/vim/bundle/puppet-syntax-vim
 	url = https://github.com/puppetlabs/puppet-syntax-vim.git
+[submodule "submodules/powerline"]
+	path = submodules/powerline
+	url = https://github.com/Lokaltog/powerline.git
