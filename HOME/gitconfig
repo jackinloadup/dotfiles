@@ -38,5 +38,7 @@
   insteadOf = drupal:
 [url "git+ssh://git@wiledesign.com/"]
   insteadOf = wi:
-[url "git+ssh://git@kanakuk.com/"]
+[url "git+ssh://git@pub1"]
   insteadOf = kuk:
+[push]
+  default = matching
