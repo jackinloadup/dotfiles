@@ -46,7 +46,6 @@ if [[ -e $HOME/.bash_profile ]]; then
   source $HOME/.bash_profile
 fi
 
-alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
 # for the lulz
 alias hack="cat /dev/urandom | hexdump"
 
@@ -64,6 +63,10 @@ if [[ $is_mac == "yes" ]] || [[ $(hostname) == "k-lmriutzel" ]]; then
   
   alias freenode="ssh -NL 6667:irc.freenode.net:6667 pub1"
   alias tpirc="ssh -NL 6666:irc.esper.net:6667 pub1"
+
+  if type "phpcs" &> /dev/null; then
+    alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
+  fi
 
   irc_tunnel
 fi
