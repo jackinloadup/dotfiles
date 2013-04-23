@@ -47,6 +47,8 @@ if [[ -e $HOME/.bash_profile ]]; then
 fi
 
 alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
+# for the lulz
+alias hack="cat /dev/urandom | hexdump"
 
 if [[ $is_mac == "yes" ]] || [[ $(hostname) == "lriutzel" ]]; then
 
