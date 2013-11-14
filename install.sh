@@ -103,6 +103,7 @@ echo "Checking if powerline is needing to be installed"
 if type "yaourt" &> /dev/null; then
   echo "\e[1;32mInstalling powerline\e[00m"
   yaourt -Qq | grep -qw python-powerline-git || yaourt -S python-powerline-git
+  yaourt -Qq | grep -qw gvim-python || yaourt -S gvim-python
 else
   echo "Sorry I don't know how to install powerline without yaourt. It might be installed but i wouldn't know"
 fi
