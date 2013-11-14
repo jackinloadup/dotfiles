@@ -32,11 +32,6 @@ export EDITOR="vim"
 
 # get information about system
 is_mac=$(detect_mac)
-ROUTER=$(get_router_ip $is_mac)
-
-if [[ $ROUTER == '10.10.12.10' ]]; then
-  is_kanakuk="yes";
-fi
 
 if [[ $is_mac == "yes" ]]; then
   plugins+=(brew osx)
@@ -60,17 +55,11 @@ if [[ $is_mac == "yes" ]] || [[ $(hostname) == "k-lmriutzel" ]]; then
   alias toph='ssh toph -t su'
   alias nana='ssh nana -t tmux a'
   alias opus='ssh opus -t su -c "tmux\ a" root'
-  
-  alias freenode="ssh -NL 6667:irc.freenode.net:6667 pub1"
-  alias tpirc="ssh -NL 6666:irc.esper.net:6667 pub1"
 
   if type "phpcs" &> /dev/null; then
     alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
   fi
 
-  if [[ ${+TMUX} != 1 ]]; then
-    irc_tunnel
-  fi
 fi
 
 # if tmux make force get zsh to not be stupid and use 256 color mode
@@ -122,6 +111,8 @@ function my_git_prompt_info() {
 }
 
 source $ZSH/oh-my-zsh.sh
+
+source /usr/lib/python3.3/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # Less Colors for Man Pages
 export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking

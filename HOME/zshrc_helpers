@@ -21,20 +21,21 @@ function get_router_ip {
   fi
 }
 
-function irc_tunnel() {
-  # Setup tmux session for behind the scenes commands it not already running
-  if [[ $(tmux ls 2> /dev/null | grep cmds | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]; then
-    tmux new-session -d -s cmds
-  fi
-
-  # Add tmux window for irc tunnel to get around kuk firewall if not already setup
-  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]; then
-    tmux new-window -k -t cmds:1 -n irc 'ssh -NL 7778:localhost:7778 wi'
-  fi
-
-  # tear down irc tunnel when not needed
-  #if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') != 0 ]]
-  #then
-  #  tmux kill-window -t cmds:irc
-  #fi
-}
+# i'm keeping this around as an example of a command that can be launched and linger via tmux
+#function irc_tunnel() {
+#  # Setup tmux session for behind the scenes commands it not already running
+#  if [[ $(tmux ls 2> /dev/null | grep cmds | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]; then
+#    tmux new-session -d -s cmds
+#  fi
+#
+#  # Add tmux window for irc tunnel to get around kuk firewall if not already setup
+#  if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') == 0 ]]; then
+#    tmux new-window -k -t cmds:1 -n irc 'ssh -NL 7778:localhost:7778 wi'
+#  fi
+#
+#  # tear down irc tunnel when not needed
+#  #if [[ $(tmux list-windows -t cmds 2> /dev/null | grep irc | wc -l | tr -s " " | sed 's/^[ ]//g') != 0 ]]
+#  #then
+#  #  tmux kill-window -t cmds:irc
+#  #fi
+#}
