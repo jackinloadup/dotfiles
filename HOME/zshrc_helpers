@@ -1,12 +1,3 @@
-function detect_mac() {
-  if [[ $(uname -s) == "Darwin" ]]; then
-    echo "yes"
-    return
-  fi
-
-  echo "no"
-}
-
 # get_rounter_ip
 # This only gets the router ip from eth0 in osx atm
 # arg1 = is_mac

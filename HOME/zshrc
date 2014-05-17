@@ -35,13 +35,6 @@ plugins=(git)
 
 source ~/.zshrc_helpers
 
-# get information about system
-is_mac=$(detect_mac)
-
-if [[ $is_mac == "yes" ]]; then
-  plugins+=(brew osx)
-fi
-
 # this is a great place to store local settings like $PATH
 if [[ -e $HOME/.bash_profile ]]; then
   source $HOME/.bash_profile
@@ -50,13 +43,7 @@ fi
 # for the lulz
 alias hack="cat /dev/urandom | hexdump"
 
-if [[ $is_mac == "yes" ]] || [[ $(hostname) == "k-lmriutzel" ]]; then
-
-  plugins+=(django)
-
-
-  alias pub1='ssh pub1 -t su -c "tmux\ a" root'
-  alias pub1d='ssh pub1 -t su -c "tmux\ a\ -d" root'
+if [[ $(hostname) == "k-lmriutzel" ]]; then
   alias wi='ssh wi -t tmux a'
   alias toph='ssh toph -t su'
   alias nana='ssh nana -t tmux a'
