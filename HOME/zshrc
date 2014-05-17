@@ -1,6 +1,10 @@
 # Path to your oh-my-zsh configuration.
 export ZSH=$HOME/.oh-my-zsh
 
+# set editor to vim
+export EDITOR="vim"
+
+
 bindkey "^B" history-beginning-search-backward
 
 # dont use oh-my-zsh auto complete
@@ -30,8 +34,6 @@ export DISABLE_AUTO_UPDATE="true"
 plugins=(git)
 
 source ~/.zshrc_helpers
-
-export EDITOR="vim"
 
 # get information about system
 is_mac=$(detect_mac)
