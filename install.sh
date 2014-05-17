@@ -98,12 +98,17 @@ for file in $(find $DIR/HOME -maxdepth 1); do
  fi
 done
 
-# install powerline if needed
-echo "Checking if powerline is needing to be installed"
-if type "yaourt" &> /dev/null; then
-  echo "\e[1;32mInstalling powerline\e[00m"
-  yaourt -Qq | grep -qw python-powerline-git || yaourt -S python-powerline-git
-  yaourt -Qq | grep -qw gvim-python || yaourt -S gvim-python
+# install powerline if needed and is arch system
+if type "pacman" &> /dev/null; then
+  echo "Checking if powerline is needing to be installed"
+  if [[ ! -d /usr/lib/python3.4/site-packages/powerline ]]; then
+    echo "\e[1;32mInstalling powerline\e[00m"
+    yaourt -Qq | grep -qw python-powerline-git || yaourt -S python-powerline-git
+    yaourt -Qq | grep -qw gvim-python || yaourt -S gvim-python
+
+    echo "source /usr/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh" >> $DIR/HOME/zshrc
+  fi
 else
-  echo "Sorry I don't know how to install powerline without yaourt. It might be installed but i wouldn't know"
+  echo "export ZSH=$HOME/.oh-my-zsh" >> $DIR/HOME/zshrc
+  echo "source $ZSH/oh-my-zsh.sh" >> $DIR/HOME/zshrc
 fi
