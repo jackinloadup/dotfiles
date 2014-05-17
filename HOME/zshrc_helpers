@@ -1,5 +1,10 @@
+# if you wana use some of the functions in this file simply
+# add "source ~/.zshrc_helpers" to your .zshrc file
+
+
 # get_rounter_ip
 # This only gets the router ip from eth0 in osx atm
+#   this is useful if you'd like to switch system settings based on location
 # arg1 = is_mac
 function get_router_ip {
   local is_mac=$1
