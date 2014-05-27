@@ -110,6 +110,8 @@ if type "pacman" &> /dev/null; then
     echo "source /usr/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh" >> $DIR/HOME/zshrc
   fi
 else
-  echo 'export ZSH=$HOME/.oh-my-zsh' >> $DIR/HOME/zshrc
-  echo 'source $ZSH/oh-my-zsh.sh' >> $DIR/HOME/zshrc
+  if [[ ! grep -q oh-my-zsh "$DIR/HOME/zshrc" ]]; then
+    echo 'export ZSH=$HOME/.oh-my-zsh' >> $DIR/HOME/zshrc
+    echo 'source $ZSH/oh-my-zsh.sh' >> $DIR/HOME/zshrc
+  fi
 fi
