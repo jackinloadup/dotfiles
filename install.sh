@@ -104,8 +104,9 @@ if type "pacman" &> /dev/null; then
   if [[ ! -d /usr/lib/python3.4/site-packages/powerline ]]; then
     echo "\e[1;32mInstalling powerline\e[00m"
     yaourt -Qq | grep -qw python-powerline-git || yaourt -S python-powerline-git
-    yaourt -Qq | grep -qw gvim-python || yaourt -S gvim-python
+    yaourt -Qq | grep -qw gvim-python3 || yaourt -S gvim-python3
 
+    # still need to ensure that this is not already in the file
     echo "source /usr/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh" >> $DIR/HOME/zshrc
   fi
 else
