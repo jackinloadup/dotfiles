@@ -4,9 +4,6 @@
 [submodule "HOME/vim/bundle/javascript-syntax"]
 	path = HOME/vim/bundle/javascript-syntax
 	url = https://github.com/jelera/vim-javascript-syntax.git
-[submodule "HOME/vim/bundle/powerline"]
-	path = HOME/vim/bundle/powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "HOME/vim/bundle/solarized"]
 	path = HOME/vim/bundle/solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
