@@ -3,7 +3,7 @@
 	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule "HOME/vim/bundle/javascript-syntax"]
 	path = HOME/vim/bundle/javascript-syntax
-	url = https://github.com/jackinloadup/vim-javascript-syntax.git
+	url = https://github.com/jelera/vim-javascript-syntax.git
 [submodule "HOME/vim/bundle/powerline"]
 	path = HOME/vim/bundle/powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
