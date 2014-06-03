@@ -107,11 +107,12 @@ if type "pacman" &> /dev/null; then
     yaourt -Qq | grep -qw gvim-python3 || yaourt -S gvim-python3
 
     # still need to ensure that this is not already in the file
-    echo "source /usr/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh" >> $DIR/HOME/zshrc
+    echo "source /usr/lib/python3.4/site-packages/powerline/bindings/zsh/powerline.zsh" >> $DESTINATION/.zshrc.local
   fi
 else
-  if [[ ! grep -q oh-my-zsh "$DIR/HOME/zshrc" ]]; then
-    echo 'export ZSH=$HOME/.oh-my-zsh' >> $DIR/HOME/zshrc
-    echo 'source $ZSH/oh-my-zsh.sh' >> $DIR/HOME/zshrc
+  if ! grep -q oh-my-zsh $DESTINATION/.zshrc.local; then
+    echo 'export ZSH_THEME="lukerandall"' >> $DESTINATION/.zshrc.local
+    echo 'export ZSH=$HOME/.oh-my-zsh' >> $DESTINATION/.zshrc.local
+    echo 'source $ZSH/oh-my-zsh.sh' >> $DESTINATION/.zshrc.local
   fi
 fi

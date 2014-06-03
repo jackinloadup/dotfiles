@@ -11,7 +11,6 @@ unsetopt correct_all
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # also note that powreline will overwrite this theme if loaded
-export ZSH_THEME="lukerandall"
 export LANG=en_US.UTF-8
 
 # Set to this to use case-sensitive completion
@@ -32,6 +31,9 @@ plugins=(git)
 
 # this is a great place to store local settings like $PATH
 [[ -f ~/.bash_profile ]] && . ~/.bash_profile
+
+# place per machine/user settings here
+[[ -f ~/.zshrc.local ]] && . ~/.zshrc.local
 
 # for the lulz
 alias hack="cat /dev/urandom | hexdump"
