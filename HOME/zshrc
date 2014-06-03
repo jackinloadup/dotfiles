@@ -30,8 +30,6 @@ export DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git)
 
-#source ~/.zshrc_helpers
-
 # this is a great place to store local settings like $PATH
 [[ -f ~/.bash_profile ]] && . ~/.bash_profile
 
