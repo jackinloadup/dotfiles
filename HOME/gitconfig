@@ -43,3 +43,6 @@
   insteadOf = kuk:
 [push]
   default = matching
+[credential]
+  # http auth caching (15 min default)
+  helper = cache
