@@ -104,6 +104,12 @@ set hlsearch " highlight all search results
 
 set showmatch "Show matching bracets when text indicator is over them
 
+"set listchars=eol:↵
+if has("multi_byte")
+  set listchars=eol:¶,tab:˾˾,trail:˽,extends:↦,precedes:↤,nbsp:˽
+else
+  set listchars=eol:$,tab:>-,trail:-,extends:>,precedes:<,nbsp:%
+endif
 
 """"""""""""""""""""""""""""""""""
 " Editor
