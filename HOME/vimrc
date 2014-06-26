@@ -134,12 +134,14 @@ map <left> <nop>
 map <right> <nop>
 
 let javaScript_fold=1
-au FileType javascript call JavaScriptFold()
+autocmd FileType javascript call JavaScriptFold()
 
 " autocomplete settings
 imap <c-space> <c-x><c-o>
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType css setl omnifunc=csscomplete#CompleteCSS
+autocmd FileType javascript setl omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php setl omnifunc=phpcomplete#CompletePHP
+autocmd FileType html,xhtml setl omnifunc=htmlcomplete#CompleteTags
 
 if has("autocmd")
   " Drupal *.module and *.install files.
