@@ -82,8 +82,6 @@ colorscheme solarized
 set nomodeline
 set nocompatible
 
-set number
-set list
 set pastetoggle=<f2>
 set autoindent
 set smartindent
@@ -91,6 +89,10 @@ set smartindent
 """"""""""""""""""""""""""""""""""
 " User interface
 """"""""""""""""""""""""""""""""""
+
+set number
+set relativenumber
+set list
 
 " Set 7 lines to the curors - when moving vertical
 set so=7
@@ -151,6 +153,18 @@ if has("autocmd")
     autocmd BufRead,BufNewFile *.profile set filetype=php
     autocmd BufRead,BufNewFile *.view set filetype=php
   augroup END
+
+  if v:version >= 740
+    autocmd InsertEnter * :set norelativenumber
+    autocmd InsertLeave * :set relativenumber
+    autocmd FocusLost * :set norelativenumber
+    autocmd FocusGained * :set relativenumber
+  else
+    autocmd InsertEnter * :set number
+    autocmd InsertLeave * :set relativenumber
+    autocmd FocusLost * :set number
+    autocmd FocusGained * :set relativenumber
+  endif
 endif
 
 let g:syntastic_phpcs_conf=" --standard=Drupal --extensions=php,module,inc,install,test,profile,theme"
