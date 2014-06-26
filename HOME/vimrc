@@ -99,13 +99,12 @@ set so=7
 
 " search
 set incsearch " instantly display search results
-set ignorecase smartcase "Ignore case when searching
+set ignorecase " Ignore case when searching
+set smartcase " unless search contains uppercase letter
+set hlsearch " highlight all search results
 
-"display bracket match
 set showmatch "Show matching bracets when text indicator is over them
 
-" highlight all search results
-set hlsearch
 
 """"""""""""""""""""""""""""""""""
 " Editor
