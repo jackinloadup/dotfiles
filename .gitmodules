@@ -37,3 +37,6 @@
 [submodule "HOME/vim/bundle/scss-syntax"]
 	path = HOME/vim/bundle/scss-syntax
 	url = https://github.com/cakebaker/scss-syntax.vim.git
+[submodule "HOME/vim/bundle/html5"]
+	path = HOME/vim/bundle/html5
+	url = https://github.com/othree/html5.vim.git
