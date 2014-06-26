@@ -19,9 +19,6 @@
   added = yellow
   changed = green
   untracked = cyan
-[user]
-  name = Lucas Riutzel
-  email = lriutzel@gmail.com
 [core]
   excludesfile = ~/.gitignore
   editor = /usr/bin/vim
@@ -46,3 +43,6 @@
 [credential]
   # http auth caching (15 min default)
   helper = cache
+[user]
+  name = Lucas Riutzel
+  email = lriutzel@gmail.com
