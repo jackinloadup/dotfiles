@@ -71,13 +71,6 @@ set backspace=indent,eol,start
 set laststatus=2
 set encoding=utf-8
 
-" Theme
-set t_Co=256
-set background=dark
-let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-colorscheme solarized
-
 set nomodeline
 set nocompatible
 
@@ -109,6 +102,29 @@ if has("multi_byte")
   set listchars=eol:¶,tab:˾˾,trail:˽,extends:↦,precedes:↤,nbsp:˽
 else
   set listchars=eol:$,tab:>-,trail:-,extends:>,precedes:<,nbsp:%
+endif
+
+" Theme
+set t_Co=256
+set background=dark
+let g:molokai_original=0
+colorscheme molokai
+
+if has('gui_running')
+  set guicursor+=a:blinkon0       " Cursor doesn't blink - it's annoying
+  set guioptions-=m               " No Menubar
+  set guioptions-=T               " No Toolbar
+  set guioptions-=l               " No Scrollbar left
+  set guioptions-=L               " No Scrollbar left when split
+  set guioptions-=r               " No Scrollbar right
+  set guioptions-=r               " No Scrollbar right when split
+
+  set laststatus=2                " always show statusline
+
+  set gfn=Monaco\ for\ Powerline\ 10
+
+  set lines=40                    " Height
+  set columns=85                  " Width
 endif
 
 """"""""""""""""""""""""""""""""""
