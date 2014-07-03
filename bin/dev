@@ -1,0 +1,143 @@
+#!/bin/bash
+# dev: Aids in repetative configuration tasks on development servers
+#
+# Copyright (C) 2014  Lucas Riutzel
+#                     http://mobomo.com
+#                     lucas (at) mobomo (dot) com
+# 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 3
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details:
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see http://www.gnu.org/licenses/.
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
+
+usage() {
+	cat <<- EOF
+	usage: $PROGNAME [options]
+	
+	Program is meant to aid run on a development server
+	 - Manages if local webserver proxies feeds to nasa.gov 
+
+	OPTIONS:
+	   -p --prod              switch feeds to production
+	   -l --local             switch feeds to local
+	   -h --help              show this help
+
+	
+	Examples:
+	   Print which environment feeds are pointed to:
+	   $PROGNAME
+
+	   Switch to Production:
+	   $PROGNAME --prod
+
+	   Switch to Local:
+	   $PROGNAME --local
+	EOF
+}
+
+cmdline() {
+  # got this idea from here:
+  # http://kirk.webfinish.com/2009/10/bash-shell-script-to-use-getopts-with-gnu-style-long-positional-parameters/
+  local nginx=/etc/nginx
+  local file=$nginx/sites-alter-available/cms-dev/connect-feeds.conf
+  local link=$nginx/sites-alter-enabled/cms-dev/connect-feeds.conf
+
+  local arg=
+  for arg
+  do
+    local delim=""
+    case "$arg" in
+      #translate --gnu-long-options to -g (short options)
+      --help)           args="${args}-h ";;
+      --prod)           args="${args}-p ";;
+      --local)           args="${args}-l ";;
+      #pass through anything else
+      *) [[ "${arg:0:1}" == "-" ]] || delim="\""
+          args="${args}${delim}${arg}${delim} ";;
+    esac
+  done
+
+  #Reset the positional parameters to the short options
+  eval set -- $args
+
+  while getopts "plhxt:c:" OPTION
+  do
+       case $OPTION in
+       h)
+           usage
+           exit 0
+           ;;
+       p)
+           switch_to_prod $file $link
+           exit 0
+           ;;
+       l)
+           switch_to_local $link
+           exit 0
+           ;;
+      esac
+  done
+
+  is_empty $args \
+    && check_dev_setup $link
+
+  return 0
+}
+
+switch_to_prod() {
+  local file=$1
+  local link=$2
+
+  is_symbolic_link $link \
+    && echo "Already on Production" \
+    || (sudo ln -s $file $link \
+      && sudo nginx -s reload \
+      && echo "Switched to Production")
+}
+
+switch_to_local() {
+  local link=$1
+
+  is_symbolic_link $link \
+    && (sudo rm $link \
+      && sudo nginx -s reload \
+      && echo "Switched to Local") \
+    || echo "Already on Local"
+}
+
+is_empty() {
+  local args=$1
+
+  [[ -z "$args" ]]
+}
+
+is_symbolic_link() {
+  local file=$1;
+
+  [[ -L $file ]]
+}
+
+check_dev_setup() {
+  local link=$1
+
+  is_symbolic_link $link \
+    && echo "Currently pointed at PRODUCTION" \
+    || echo "Currently pointed at LOCAL"
+}
+
+main() {
+  cmdline $ARGS
+}
+
+main

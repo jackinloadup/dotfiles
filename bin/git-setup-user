@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+#
+# Copyright (C) 2014  Lucas Riutzel
+#                     http://lucasr.com
+#                     lriutzel (at) gmail (dot) com
+# 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 3
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details:
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see http://www.gnu.org/licenses/.
+
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
+
+usage() {
+	cat <<- EOF
+	usage: $PROGNAME
+	
+	Checks if the logged in user has their git username set
+	  if not it will prompt the user to set their name and email
+	  - This could be appended to something like .bashrc or .zshrc
+
+	OPTIONS:
+	   -h --help            show this help
+
+	
+	EOF
+}
+
+check_for_git_user () {
+  local file=$HOME/.gitconfig
+
+  grep -q "\[user\]" $file \
+    && exit 0 \
+    || return 1
+}
+
+get_git_user() {
+  local name=
+  local email=
+  local CORRECT=
+
+  clear
+  echo -e "\e[1;3;31m              GIT SETUP             \e[00m"
+  echo "Your git name and email address has not been set yet."
+  echo -e "Please enter your details below\n"
+
+  echo -en "Enter your \e[1;33mFull Name\e[00m (ex: John Doe): "
+  read name
+  echo -en "Enter your \e[1;33mEmail\e[00m (ex: john@example.com): "
+  read email
+
+  echo -e "Full Name: \"$name\"\nEmail: \"$email\""
+  echo -en "Does this look correct? (\e[1;32my\e[00m/\e[00;31mn\e[00m) "
+
+  read CORRECT
+
+  if [[ $CORRECT != "y" ]]; then
+    get_git_user
+  fi
+
+  echo "[user]" >> ~/.gitconfig
+  echo "  name = $name" >> ~/.gitconfig
+  echo "  email = $email" >> ~/.gitconfig
+
+  echo -e "\e[1;32mThanks, Have a great day!\e[00m"
+}
+
+cmdline() {
+  local arg=
+  for arg
+  do
+    local delim=""
+    case "$arg" in
+      #translate --gnu-long-options to -g (short options)
+      --help)           args="${args}-h ";;
+      #pass through anything else
+      *) [[ "${arg:0:1}" == "-" ]] || delim="\""
+          args="${args}${delim}${arg}${delim} ";;
+    esac
+  done
+
+  #Reset the positional parameters to the short options
+  eval set -- $args
+
+  local ip=
+  local netmask=
+
+  while getopts "h" OPTION
+  do
+       case $OPTION in
+       h)
+           usage
+           exit 0
+           ;;
+      esac
+  done
+
+  ! check_for_git_user \
+    && get_git_user
+
+  return 0
+}
+
+main () {
+  cmdline $ARGS
+}
+
+main
