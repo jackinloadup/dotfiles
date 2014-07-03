@@ -127,6 +127,8 @@ if has('gui_running')
   set columns=85                  " Width
 endif
 
+let &colorcolumn="80,".join(range(120,999),",")
+
 """"""""""""""""""""""""""""""""""
 " Editor
 """"""""""""""""""""""""""""""""""
