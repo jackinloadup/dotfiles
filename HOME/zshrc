@@ -1,11 +1,12 @@
 export EDITOR="vim"
+export LANG=en_US.UTF-8
 
 bindkey "^B" history-beginning-search-backward
 
 # dont use oh-my-zsh auto complete
 unsetopt correct_all
 
-export LANG=en_US.UTF-8
+setopt autopushd
 
 # Comment this out to disable weekly auto-update checks
 export DISABLE_AUTO_UPDATE="true"
@@ -47,8 +48,6 @@ elif [[ ${TERM} != "xterm-256color" ]]; then
 fi
 
 unsetopt correct_all
-
-setopt autopushd
 
 # override lukerandall theme function
 function my_git_prompt_info() {
