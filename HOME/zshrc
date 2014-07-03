@@ -1,4 +1,3 @@
-# set editor to vim
 export EDITOR="vim"
 
 bindkey "^B" history-beginning-search-backward
@@ -6,21 +5,10 @@ bindkey "^B" history-beginning-search-backward
 # dont use oh-my-zsh auto complete
 unsetopt correct_all
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-# also note that powreline will overwrite this theme if loaded
 export LANG=en_US.UTF-8
-
-# Set to this to use case-sensitive completion
-# export CASE_SENSITIVE="true"
 
 # Comment this out to disable weekly auto-update checks
 export DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable colors in ls
-# export DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
 # export DISABLE_AUTO_TITLE="true"
