@@ -222,7 +222,7 @@ if has("mouse")
 endif
 
 " toggle text and mouse settings for easy copying
-nmap <ESC>' :set list!<CR> :set number!<CR> :call ToggleMouse()<CR>
+nmap <ESC>' :set list!<CR> :set nonumber<CR> :set norelativenumber<CR> :call ToggleMouse()<CR>
 
 function! ToggleMouse()
   if &mouse == 'a'
