@@ -1,0 +1,109 @@
+#!/bin/bash
+# dev: Aids in repetative configuration tasks on development servers
+#
+# Copyright (C) 2014  Lucas Riutzel
+#                     http://mobomo.com
+#                     lucas (at) mobomo (dot) com
+# 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 3
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details:
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see http://www.gnu.org/licenses/.
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
+
+usage() {
+	cat <<- EOF
+	usage: $PROGNAME [-h]
+	
+	Switches which 
+	 - Manages if local webserver proxies feeds to nasa.gov 
+
+	OPTIONS:
+	   -h --help              show this help
+	EOF
+}
+
+select_user() {
+  local gitUsers=
+  declare -A gitUsers
+
+  gitUsers["jason@mobomo.com"]="Jason Schulte"
+  gitUsers["lucas@mobomo.com"]="Lucas Riutzel"
+  gitUsers["scot.self@gmail.com"]="Scot Self"
+  gitUsers["tedstein@gmail.com"]="Ted Stein"
+  gitUsers["karandeep@mobomo.com"]="Karandeep Kang"
+  gitUsers["ken.fang@mobomo.com"]="Ken Fang"
+
+  OLD_IFS=${IFS} # Backup IFS
+  IFS="" # Set new IFS
+
+  echo "Who are you?"
+  select i in ${!gitUsers[@]}
+  do
+    set_user ${gitUsers["${i}"]} $i
+    break
+  done
+
+  IFS=${OLD_IFS} # Restore IFS variable
+}
+
+set_user() {
+  local name=$1
+  local email=$2
+  local file=$HOME/.gitconfig
+  grep -Ev '\[user\]|name|email' "$file" > "$file-tmp"
+  mv "$file-tmp" "$file"
+  echo -e "[user]\n  name = $name\n  email = $email" >> $file
+}
+
+cmdline() {
+  local arg=
+  for arg
+  do
+    local delim=""
+    case "$arg" in
+      #translate --gnu-long-options to -g (short options)
+      --help)           args="${args}-h ";;
+      #pass through anything else
+      *) [[ "${arg:0:1}" == "-" ]] || delim="\""
+          args="${args}${delim}${arg}${delim} ";;
+    esac
+  done
+
+  #Reset the positional parameters to the short options
+  eval set -- $args
+
+  local ip=
+  local netmask=
+
+  while getopts "h" OPTION
+  do
+       case $OPTION in
+       h)
+           usage
+           exit 0
+           ;;
+      esac
+  done
+
+  select_user
+
+  return 0
+}
+
+
+main() {
+  cmdline $ARGS
+}
+
+main
