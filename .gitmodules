@@ -13,9 +13,6 @@
 [submodule "HOME/vim/bundle/fugitive"]
 	path = HOME/vim/bundle/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "HOME/vim/bundle/markdown"]
-	path = HOME/vim/bundle/markdown
-	url = https://github.com/hallison/vim-markdown.git
 [submodule "HOME/vim/bundle/supertab"]
 	path = HOME/vim/bundle/supertab
 	url = https://github.com/ervandew/supertab.git
@@ -37,3 +34,6 @@
 [submodule "HOME/vim/bundle/html5"]
 	path = HOME/vim/bundle/html5
 	url = https://github.com/othree/html5.vim.git
+[submodule "HOME/vim/bundle/markdown"]
+	path = HOME/vim/bundle/markdown
+	url = https://github.com/plasticboy/vim-markdown.git
