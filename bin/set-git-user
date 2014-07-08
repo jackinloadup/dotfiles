@@ -39,6 +39,7 @@ select_user() {
 
   gitUsers["jason@mobomo.com"]="Jason Schulte"
   gitUsers["lucas@mobomo.com"]="Lucas Riutzel"
+  gitUsers["marc.elliott.levy@gmail.com"]="Marc Levy"
   gitUsers["scot.self@gmail.com"]="Scot Self"
   gitUsers["tedstein@gmail.com"]="Ted Stein"
   gitUsers["karandeep@mobomo.com"]="Karandeep Kang"
