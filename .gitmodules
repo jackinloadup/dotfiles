@@ -37,3 +37,6 @@
 [submodule "HOME/vim/bundle/markdown"]
 	path = HOME/vim/bundle/markdown
 	url = https://github.com/plasticboy/vim-markdown.git
+[submodule "submodules/drupalcs"]
+	path = submodules/drupalcs
+	url = http://git.drupal.org/project/drupalcs.git
