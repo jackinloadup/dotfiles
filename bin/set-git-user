@@ -44,6 +44,7 @@ select_user() {
   gitUsers["tedstein@gmail.com"]="Ted Stein"
   gitUsers["karandeep@mobomo.com"]="Karandeep Kang"
   gitUsers["ken.fang@mobomo.com"]="Ken Fang"
+  gitUsers["gwyn@mobomo.com"]="Gwyn Cavallo"
 
   OLD_IFS=${IFS} # Backup IFS
   IFS="" # Set new IFS
