@@ -146,10 +146,10 @@ imap jk <Esc>
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
 " disable arrow keys
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
+"map <up> <nop>
+"map <down> <nop>
+"map <left> <nop>
+"map <right> <nop>
 
 let javaScript_fold=1
 autocmd FileType javascript call JavaScriptFold()
