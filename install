@@ -1,0 +1,197 @@
+#!/usr/bin/env bash
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
+
+## TODO
+# * default path on login
+
+usage() {
+	cat <<- EOF
+	usage: $PROGNAME [options] [-u user]
+	
+	Program installs dotfiles into the specified user's home
+	folder.
+
+	Program installs dotfiles into the specified user's home
+	Program installs dotfiles into the specified user's home
+
+
+	OPTIONS:
+	   -u --user              set which user should have files installed
+	                            defaults to current user
+	   -h --help              show this help
+
+	
+	Examples:
+	   Print the status of the dotfiles install
+	   $PROGNAME
+	EOF
+}
+
+cmdline() {
+  local USER_FOLDER=$HOME
+  local REPO_DIR=.dotfiles
+
+  # got this idea from here:
+  # http://kirk.webfinish.com/2009/10/bash-shell-script-to-use-getopts-with-gnu-style-long-positional-parameters/
+  local arg=
+  for arg
+  do
+    local delim=""
+    case "$arg" in
+      #translate --gnu-long-options to -g (short options)
+      --help)           args="${args}-h ";;
+      --user)           args="${args}-u ";;
+      --repo-directory) args="${args}-r ";;
+      #pass through anything else
+      *) [[ "${arg:0:1}" == "-" ]] || delim="\""
+          args="${args}${delim}${arg}${delim} ";;
+    esac
+  done
+
+  #Reset the positional parameters to the short options
+  eval set -- $args
+
+  while getopts "u:h" OPTION
+  do
+    case $OPTION in
+    h)
+      usage
+      exit 0
+      ;;
+    u)
+      USER_FOLDER=$(getent passwd $OPTARG | cut -d: -f6)
+      ;;
+    r)
+      REPO_DIR=$OPTARG
+      ;;
+    esac
+  done
+
+  # if no args were given print usage
+  #is_empty $args \
+  #  && usage
+  run_install $USER_FOLDER $REPO_DIR
+
+  return 0
+}
+
+run_install() {
+  local USER_FOLDER=$1
+  local REPO_DIR=$2
+
+  make_symbolic_link $PROGDIR "$USER_FOLDER/$REPO_DIR"
+
+  install_home $USER_FOLDER $REPO_DIR
+}
+
+install_home() {
+  local USER_FOLDER=$1
+  local REPO_DIR=$2
+  local FILES=""
+
+  for FILE in $USER_FOLDER/$REPO_DIR/HOME/* ; do
+    FILE=${FILE#$USER_FOLDER/$REPO_DIR/HOME/}
+    FILES="$FILES\n$FILE"
+  done
+
+  FILES=$(echo $FILES  | sed 's/^\\n*//') # remove the first newline
+
+  echo -e "To install we are going to link the $(echo -e $FILES | wc -l) following files to \e[1;34m$USER_FOLDER\e[00m"
+  echo -e "\e[1;33m$(echo -e $FILES | columns)\e[00m"
+  echo -en "Does this look correct? (\e[1;32my\e[00m/\e[00;31mn\e[00m) "
+
+  read CORRECT
+
+  if [[ $CORRECT != "y" ]]; then
+    echo -e "\e[00;31mExiting. Won't install\e[00m"
+    exit 1
+  fi
+
+  for FILE in $USER_FOLDER/$REPO_DIR/HOME/* ; do
+    FILE=${FILE#$USER_FOLDER/$REPO_DIR/HOME/}
+    TARGET="$USER_FOLDER/$REPO_DIR/HOME/$FILE"
+    LINK_NAME="$USER_FOLDER/.$FILE"
+
+    make_symbolic_link $TARGET $LINK_NAME
+  done
+}
+
+# Helper functions
+is_file() {
+  local FILE=$1
+
+  [[ -a $FILE ]]
+}
+
+is_regular_file() {
+  local FILE=$1
+
+  [[ -f $FILE ]]
+}
+
+is_symbolic_file() {
+  local FILE=$1
+
+  [[ -L $FILE ]]
+}
+
+is_writeable() {
+  local FILE=$1
+
+  [[ -w $FILE ]]
+}
+
+is_file_equal() {
+  local FILE1=$1
+  local FILE2=$2
+
+  # this will follow symlinks
+  [[ $FILE1 -ef $FILE2 ]]
+}
+
+is_empty() {
+  local string=$1
+
+  [[ -z "$string" ]]
+}
+
+is_symbolic_link() {
+  local file=$1;
+
+  [[ -L $file ]]
+}
+
+make_symbolic_link() {
+  local TARGET=$1
+  local LINK_NAME=$2
+
+  # if we are already linked no need to do anything
+  is_file_equal $TARGET $LINK_NAME \
+    && return 0
+
+  # if not a regular file see if we want to replace it
+  if is_file $LINK_NAME; then
+    echo -e "\e[1;33m$LINK_NAME\e[00m already exists"
+    echo -en "Do you want to replace it? (\e[1;32my\e[00m/\e[00;31mn\e[00m) "
+    read REPLACE
+
+    if [[ $REPLACE != "y" ]]; then
+      return 0
+    fi
+
+    if [[ $REPLACE == "y" ]]; then
+      rm $LINK_NAME
+    fi
+  fi
+
+  ln -s $TARGET $LINK_NAME
+  echo -e "Linked \e[1;33m$TARGET\e[00m to \e[1;34m$LINK_NAME\e[00m"
+}
+
+main() {
+  cmdline $ARGS
+}
+
+main
