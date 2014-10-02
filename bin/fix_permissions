@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+sudo chown -R ubuntu:cloudops /var/www/nasa/.git
+sudo find /var/www/nasa/.git -type f -exec chmod 664 {} \;
+sudo find /var/www/nasa/.git -type d -exec chmod 775 {} \;
+
+sudo chown -R ubuntu:cloudops /var/www/nasa/sites/all
+sudo find /var/www/nasa/sites/all -type f -exec chmod 664 {} \;
+sudo find /var/www/nasa/sites/all -type d -exec chmod 775 {} \;
