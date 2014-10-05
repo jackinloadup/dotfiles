@@ -30,6 +30,7 @@
   br = branch
 [diff]
   tool = vimdiff
+  algorithm = patience
 [difftool]
   prompt = false
 [url "git+ssh://Jackinloadup@git.drupal.org/project/"]
