@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
+echo "Chown .git"
 sudo chown -R ubuntu:cloudops /var/www/nasa/.git
+echo "chmod files in .git"
 sudo find /var/www/nasa/.git -type f -exec chmod 664 {} \;
+echo "chmod dirs in .git"
 sudo find /var/www/nasa/.git -type d -exec chmod 775 {} \;
 
+echo "Chown sites/all"
 sudo chown -R ubuntu:cloudops /var/www/nasa/sites/all
+echo "chmod files in sites/all"
 sudo find /var/www/nasa/sites/all -type f -exec chmod 664 {} \;
+echo "chmod dirs in sites/all"
 sudo find /var/www/nasa/sites/all -type d -exec chmod 775 {} \;
