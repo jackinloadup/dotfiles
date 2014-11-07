@@ -156,8 +156,8 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 "map <left> <nop>
 "map <right> <nop>
 
-let javaScript_fold=1
-autocmd FileType javascript call JavaScriptFold()
+"let javaScript_fold=1
+"autocmd FileType javascript call JavaScriptFold()
 
 " autocomplete settings
 imap <c-space> <c-x><c-o>
