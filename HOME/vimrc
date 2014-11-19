@@ -150,6 +150,9 @@ imap jk <Esc>
 " C-r in visual mode will pull the selected text into a replace statement
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
+" allow underscore as a word seporator
+set iskeyword-=_
+
 " disable arrow keys
 "map <up> <nop>
 "map <down> <nop>
