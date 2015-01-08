@@ -27,17 +27,6 @@ plugins=(git)
 # for the lulz
 alias hack="cat /dev/urandom | hexdump"
 
-# vegeta is the name of my machine
-if [[ $(hostname -s) == "vegeta" ]]; then
-  alias wi='ssh wi -t tmux a'
-  alias opus='ssh opus -t su -c "tmux\ a" root'
-
-  # if phpcs is installed lets assume the code stanards tool is installed
-  if type "phpcs" &> /dev/null; then
-    alias drupalcs="phpcs --standard=$(pear config-get php_dir)/PHP/CodeSniffer/Standards/Drupal/ruleset.xml --extensions=php,module,inc,install,test,profile,theme media.module"
-  fi
-fi
-
 unsetopt correct_all
 
 # override lukerandall theme function
