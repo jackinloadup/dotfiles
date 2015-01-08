@@ -6,7 +6,7 @@
 	url = https://github.com/jelera/vim-javascript-syntax.git
 [submodule "HOME/vim/bundle/surround"]
 	path = HOME/vim/bundle/surround
-	url = http://github.com/tpope/vim-surround.git
+	url = https://github.com/tpope/vim-surround.git
 [submodule "HOME/vim/bundle/syntastic"]
 	path = HOME/vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
