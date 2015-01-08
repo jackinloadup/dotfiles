@@ -45,11 +45,6 @@ filetype plugin on
 " Set to auto read when a file is changed from the outside
 set autoread
 
-" Set backup directory to be in the user home folder.
-set backupdir=~/.tmp
-set swapfile
-set dir=~/.tmp
-
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
