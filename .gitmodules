@@ -40,3 +40,6 @@
 [submodule "submodules/coder"]
 	path = submodules/coder
 	url = http://git.drupal.org/project/coder.git
+[submodule "HOME/vim/bundles/i3-syntax"]
+	path = HOME/vim/bundle/i3-syntax
+	url = https://github.com/PotatoesMaster/i3-vim-syntax.git
