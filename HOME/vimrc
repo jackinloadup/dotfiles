@@ -239,3 +239,5 @@ function! ToggleMouse()
     echo "Mouse usage enabled"
   endif
 endfunction
+
+hi Normal ctermbg=NONE
