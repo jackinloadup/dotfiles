@@ -40,3 +40,9 @@
 [submodule "HOME/vim/bundles/i3-syntax"]
 	path = HOME/vim/bundle/i3-syntax
 	url = https://github.com/PotatoesMaster/i3-vim-syntax.git
+[submodule "HOME/zprezto"]
+	path = HOME/zprezto
+	url = https://github.com/sorin-ionescu/prezto.git
+[submodule "HOME/vim/bundle/vimwiki"]
+	path = HOME/vim/bundle/vimwiki
+	url = git@github.com:vimwiki/vimwiki.git
