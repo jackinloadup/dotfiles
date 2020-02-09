@@ -24,6 +24,7 @@
   editor = /usr/bin/vim
 [alias]
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  tracked = for-each-ref --format='%(refname:short) <- %(upstream:short)' refs/heads
   poke = !git ls-remote origin | grep -w refs/heads/poke && git push origin :poke || git push origin master:poke
   board = "!f() { php $HOME/bin/gitboard $@; }; f"
   co = checkout
