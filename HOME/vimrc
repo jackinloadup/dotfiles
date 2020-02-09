@@ -219,7 +219,11 @@ let g:sparkupArgs = '--no-last-newline --indent-spaces=2'
 
 if has("mouse")
   set mouse=a
-  set ttymouse=xterm2
+  if has("mouse_sgr")
+    set ttymouse=sgr
+  else
+    set ttymouse=xterm2
+  end
 endif
 
 " toggle text and mouse settings for easy copying
