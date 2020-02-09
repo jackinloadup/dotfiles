@@ -240,3 +240,5 @@ function! ToggleMouse()
 endfunction
 
 hi Normal ctermbg=NONE
+
+hi Visual term=reverse cterm=reverse guibg=Grey
