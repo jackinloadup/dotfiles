@@ -37,6 +37,9 @@
   prompt = false
 [push]
   default = matching
+[pager]
+  dif = diff-so-fancy | less --tabs=1,5 -RFX
+  show = diff-so-fancy | less --tabs=1,5 -RFX
 [credential]
   # http auth caching (15 min default)
   helper = cache
