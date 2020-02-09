@@ -29,6 +29,7 @@
   board = "!f() { php $HOME/bin/gitboard $@; }; f"
   co = checkout
   br = branch
+  git = !exec git
 [diff]
   tool = vimdiff
   algorithm = patience
