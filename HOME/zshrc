@@ -1,62 +1,79 @@
-export EDITOR="vim"
-export LANG=en_US.UTF-8
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p11k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-bindkey "^B" history-beginning-search-backward
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
 
-# dont use oh-my-zsh auto complete
-unsetopt correct_all
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
 
-setopt autopushd
-
-# Comment this out to disable weekly auto-update checks
-export DISABLE_AUTO_UPDATE="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# export DISABLE_AUTO_TITLE="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
-
-# this is a great place to store local settings like $PATH
-[[ -f ~/.bash_profile ]] && . ~/.bash_profile
-
-# place per machine/user settings here
-[[ -f ~/.zshrc.local ]] && . ~/.zshrc.local
+if [[ -s "${ZDOTDIR:-$HOME}/.zshrc.local" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zshrc.local"
+fi
 
 # for the lulz
 alias hack="cat /dev/urandom | hexdump"
 
-unsetopt correct_all
+# Customize to your needs...
+alias lg="git lg"
+alias s="git status"
+alias f="git diff"
+alias fs="git diff --staged"
+alias a="git add"
+alias mtag="maiden tagRevision"
+alias l="ls -la"
+alias ltag="git tag |sort -V| tail -n 10"
 
-# override lukerandall theme function
-function my_git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null)
-  if [[ $ref == refs* ]]; then
-    git="${ref#refs/heads/}"
-  elif [[ -n $(git describe --exact-match HEAD 2> /dev/null) ]]; then
-    git=$(git describe --exact-match HEAD 2> /dev/null)
-  elif [[ -n $(git describe HEAD 2> /dev/null) ]]; then
-    git=$(git describe HEAD | sed "s/.\{9\}$//g" | sed "s/-/+/"  2> /dev/null)
-  fi
+alias open="xdg-open"
 
-  GIT_STATUS=$(git_prompt_status)
-  [[ -n $GIT_STATUS ]] && GIT_STATUS=" $GIT_STATUS"
-
-  if [[ $git =~ .+ ]]; then
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX$git$GIT_STATUS$ZSH_THEME_GIT_PROMPT_SUFFIX";
-  fi
+httpdiff () {
+  diff <(curl -vs "$1" 2>&1) <(curl -vs "$2" 2>&1)
 }
 
-# Less Colors for Man Pages
-export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
-export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
-export LESS_TERMCAP_me=$'\E[0m'           # end mode
-export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
-export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
-export LESS_TERMCAP_ue=$'\E[0m'           # end underline
-export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
-
-if hash git-setup-user 2>/dev/null; then
-  git-setup-user
+unsetopt correct_all
+#
+#
+# SSH
+#
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
+
+export HISTCONTROL=ignorespace
+
+# https://www.growingwiththeweb.com/2018/01/slow-nvm-init.html
+# run. Ensure this block is only run once if .bashrc gets sourced multiple times
+# by checking whether __init_nvm is a function.
+#source /usr/share/nvm/init-nvm.sh
+if [ -s "$HOME/.nvm/nvm.sh" ] && [ ! "$(type -t __init_nvm)" = function ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+  declare -a __node_commands=('nvm' 'node' 'npm' 'yarn' 'gulp' 'grunt' 'webpack')
+  function __init_nvm() {
+    for i in "${__node_commands[@]}"; do unalias $i; done
+    . "$NVM_DIR"/nvm.sh
+    unset __node_commands
+    unset -f __init_nvm
+  }
+  for i in "${__node_commands[@]}"; do alias $i='__init_nvm && '$i; done
+fi
+
+# tabtab source for electron-forge package
+# uninstall by removing these lines or running `tabtab uninstall electron-forge`
+[[ -f /home/lriutzel/Projects/sandbox/JFrogfy/node_modules/tabtab/.completions/electron-forge.zsh ]] && . /home/lriutzel/Projects/sandbox/JFrogfy/node_modules/tabtab/.completions/electron-forge.zsh
+
+source /home/lriutzel/.config/broot/launcher/bash/br
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
