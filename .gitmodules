@@ -46,3 +46,6 @@
 [submodule "HOME/vim/bundle/vimwiki"]
 	path = HOME/vim/bundle/vimwiki
 	url = git@github.com:vimwiki/vimwiki.git
+[submodule "HOME/powerlevel10k"]
+	path = HOME/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
